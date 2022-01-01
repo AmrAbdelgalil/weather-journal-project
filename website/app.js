@@ -59,19 +59,16 @@ const postData = async (url = "", data = {}) => {
 };
 
 // retrieve data from our app
-// update UI
+// Function to update user interface
 const updateUI = async () => {
   const request = await fetch("/all");
   try {
-    const getUpdateData = await request.json();
-    console.log(getUpdateData);
-    document.getElementById("date").innerHTML = getUpdateData[0].date;
+    const allData = await request.json();
+    document.getElementById("date").innerHTML = "Date: " + allData.date;
     document.getElementById("temp").innerHTML =
-      "Temperature is " +
-      Math.round(getUpdateData[0].temp) +
-      " Fahrenheit Degrees";
+      "Temperature is: " + allData.temperature + " Fahrenheit Degrees";
     document.getElementById("content").innerHTML =
-      "and I'm feeling " + getUpdateData[0].content;
+      "and I'm feeling " + allData.feelings;
   } catch (error) {
     console.log("error", error);
   }
